@@ -1,7 +1,7 @@
-
+require('dotenv').config()
 const { Sequelize, QueryTypes } = require('sequelize');
 
-const sequelize = new Sequelize('blogs', 'postgres', 'your_password', {
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   host: 'localhost',
   dialect: 'postgres',
   logging: console.log,
@@ -20,7 +20,7 @@ const main = async () => {
       );
     });
   } catch (error) {
-    console.error('Error:', error);
+    console.error(error);
   } finally {
     await sequelize.close();
   }
