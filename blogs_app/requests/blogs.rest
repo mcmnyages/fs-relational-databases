@@ -1,0 +1,16 @@
+### GET BLOGS ###
+GET http://localhost:3001/api/blogs
+
+### CREATE A BLOG ###
+POST  http://localhost:3001/api/blogs
+Content-Type: application/json
+
+{
+  "author": "Michael Chan",
+  "title": "React patterns",
+  "url": "https://reactpatterns.com/",
+  "likes": 7
+}
+
+### DELETE A BLOG ###
+DELETE http://localhost:3001/api/blogs/4
