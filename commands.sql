@@ -14,6 +14,7 @@ INSERT INTO blogs (author, url, title, likes) VALUES
  ('Jane Smith', 'https://example.com/blog2', 'Getting Started with Node.js', 10);
 
 
+-- ######################  RESULTS  #################################
 -- postgres=# CREATE TABLE blogs (
 -- postgres(#     id SERIAL PRIMARY KEY,
 -- postgres(#     author TEXT,
