@@ -47,9 +47,6 @@ router.put('/:id', async (req, res) => {
   const blog = await Blog.findByPk(req.params.id)
 
   if (blog) {
-    blog.author = req.body.author
-    blog.title = req.body.title
-    blog.url = req.body.url
     blog.likes = req.body.likes
 
     await blog.save()
@@ -58,5 +55,6 @@ router.put('/:id', async (req, res) => {
     res.status(404).end()
   }
 })
+
 
 module.exports = router
