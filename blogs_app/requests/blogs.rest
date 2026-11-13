@@ -25,3 +25,12 @@ Content-Type: application/json
 
 ### DELETE A BLOG ###
 DELETE http://localhost:3001/api/blogs/7
+
+### LOGIN A USER ###
+POST  http://localhost:3001/api/login
+Content-Type: application/json
+
+{
+  "username": "Michael Chan",
+  "password":"secret"
+}
