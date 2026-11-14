@@ -2,16 +2,15 @@ const express = require('express')
 const { PORT } = require('./util/config')
 const { connectToDatabase } = require('./util/db')
 
+//controllers
 const blogssRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 const authorsRouter = require('./controllers/authors')
 const testingRouter = require('./controllers/testing')
 
-
 const middlware = require('./midlleware/middleware')
 const { syncModels } = require('./models')
-
 
 const app = express()
 
