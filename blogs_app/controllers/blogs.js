@@ -1,6 +1,6 @@
 
 const router = require('express').Router()
-const { Blog } = require('../models')
+const { Blog, User } = require('../models')
 const { userExtractor } = require('../midlleware/middleware')
  
 // Middleware to find a blog by ID
@@ -21,7 +21,13 @@ const blogFinder = async (req, res, next) => {
 // GET all blogs
 router.get('/', async (req, res, next) => {
   try {
-    const blogs = await Blog.findAll()
+    const blogs = await Blog.findAll({
+      include: {
+        model: User,
+        attributes: ['id', 'name', 'username']
+      }
+    })
+
     res.json(blogs)
   } catch (error) {
     next(error)
@@ -30,7 +36,6 @@ router.get('/', async (req, res, next) => {
 
 // POST a new blog (requires authentication)
 router.post('/', userExtractor, async (req, res, next) => {
-  console.log('decoded id:\n',req.decodedToken)
   try {
     const blog = await Blog.create({
       author: req.body.author,
@@ -51,22 +56,30 @@ router.get('/:id', blogFinder, (req, res) => {
   res.json(req.blog)
 })
 
-// DELETE a blog
-router.delete('/:id', blogFinder, async (req, res, next) => {
-  try {
-    await req.blog.destroy()
-    res.status(204).end()
-  } catch (error) {
-    next(error)
-  }
-})
-
 // UPDATE a blog
 router.put('/:id', blogFinder, async (req, res, next) => {
   try {
     req.blog.likes = req.body.likes
     await req.blog.save()
     res.json(req.blog)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// DELETE a blog
+router.delete('/:id', userExtractor, blogFinder, async (req, res, next) => {
+  try {
+    // Check if the authenticated user owns the blog
+    if (req.blog.userId !== req.decodedToken.id) {
+      return res.status(403).json({
+        error: 'only the creator can delete this blog'
+      })
+    }
+
+    await req.blog.destroy()
+
+    res.status(204).end()
   } catch (error) {
     next(error)
   }
