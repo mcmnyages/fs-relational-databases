@@ -1,24 +1,25 @@
 const express = require('express')
 const { PORT } = require('./util/config')
 const { connectToDatabase } = require('./util/db')
-const app = express()
 
 const blogssRouter = require('./controllers/blogs')
+const usersRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
+
+const middlware = require('./midlleware/middleware')
+
+
+const app = express()
 
 app.use(express.json())
 
 
 app.use('/api/blogs', blogssRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
 
-const errorHandler = (error, req, res, next) => {
-  console.error(error.message)
 
-  res.status(400).json({
-    error: error.message
-  })
-}
-app.use(errorHandler)
-
+app.use(middlware.errorHandler)
 
 const start = async () => {
   await connectToDatabase()

@@ -26,11 +26,36 @@ Content-Type: application/json
 ### DELETE A BLOG ###
 DELETE http://localhost:3001/api/blogs/7
 
+
+### CREATE A USER ###
+POST  http://localhost:3001/api/users
+Content-Type: application/json
+
+{
+  "name": "John Doe",
+  "username": "john@example.com",
+  "password": "secret"
+}
+
+### LIST ALL USERS ###
+GET  http://localhost:3001/api/users
+
+### LIST A USER ###
+GET  http://localhost:3001/api/users/1
+
 ### LOGIN A USER ###
 POST  http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-  "username": "Michael Chan",
+  "username": "mikechan",
   "password":"secret"
+}
+
+### CHANGE USER'S NAME ###
+PUT  http://localhost:3001/api/users/mcmnyages
+Content-Type: application/json
+
+{
+ "name":"Mike Silas" 
 }
