@@ -56,3 +56,5 @@ jobs:
       - name: Stop application
         if: always()
         run: pkill -f "node index.js" || true
+
+        
