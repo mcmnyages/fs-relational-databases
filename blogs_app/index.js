@@ -7,6 +7,7 @@ const usersRouter = require('./controllers/users')
 const loginRouter = require('./controllers/login')
 
 const middlware = require('./midlleware/middleware')
+const { syncModels } = require('./models')
 
 
 const app = express()
@@ -23,6 +24,7 @@ app.use(middlware.errorHandler)
 
 const start = async () => {
   await connectToDatabase()
+  await syncModels()
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`)
   })

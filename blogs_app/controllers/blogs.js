@@ -1,7 +1,8 @@
 
 const router = require('express').Router()
 const { Blog } = require('../models')
-
+const { userExtractor } = require('../midlleware/middleware')
+ 
 // Middleware to find a blog by ID
 const blogFinder = async (req, res, next) => {
   try {
@@ -27,10 +28,18 @@ router.get('/', async (req, res, next) => {
   }
 })
 
-// POST a new blog
-router.post('/', async (req, res, next) => {
+// POST a new blog (requires authentication)
+router.post('/', userExtractor, async (req, res, next) => {
+  console.log('decoded id:\n',req.decodedToken)
   try {
-    const blog = await Blog.create(req.body)
+    const blog = await Blog.create({
+      author: req.body.author,
+      title: req.body.title,
+      url: req.body.url,
+      likes: req.body.likes || 0,
+      userId: req.decodedToken.id
+    })
+
     res.status(201).json(blog)
   } catch (error) {
     next(error)

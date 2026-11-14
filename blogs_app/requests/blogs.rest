@@ -4,10 +4,11 @@ GET http://localhost:3001/api/blogs
 ### CREATE A BLOG ###
 POST  http://localhost:3001/api/blogs
 Content-Type: application/json
+Authorization: Bearer 
 
 {
-  "author": "Michael Chan",
-  "title": "React patterns",
+  "author": "Silas Moracha",
+  "title": "Check the token in the blog",
   "url": "https://reactpatterns.com/",
   "likes": 7
 }
@@ -20,7 +21,7 @@ Content-Type: application/json
   "author": "Michael Chan",
   "title": "React patterns",
   "url": "https://reactpatterns.com/",
-  "likes": 34
+  "likes": 29
 }
 
 ### DELETE A BLOG ###
@@ -48,7 +49,7 @@ POST  http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-  "username": "mikechan",
+  "username": "mcmnyages",
   "password":"secret"
 }
 
