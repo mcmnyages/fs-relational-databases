@@ -53,6 +53,10 @@ Content-Type: application/json
   "username": "norah@example.com",
   "password":"secret"
 }
+### LOGOUT  A USER###
+DELETE http://localhost:3001/api/logout
+Authorization: Bearer 
+
 
 ### CHANGE USER'S NAME ###
 PUT  http://localhost:3001/api/users/mcmnyages
