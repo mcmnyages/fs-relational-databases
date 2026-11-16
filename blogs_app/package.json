@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "start:test": "cross-env TESTING=true node index.js",
+    "dev":"cross-env nodemon index.js",
     "test": "cross-env TESTING=true node --test --test-concurrency=1 tests/api_ch3.test.js"
   },
   "repository": {
@@ -24,7 +25,8 @@
     "express": "^5.3.0",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.23.1",
-    "sequelize": "^6.37.8"
+    "sequelize": "^6.37.8",
+    "umzug": "^3.8.3"
   },
   "devDependencies": {
     "cross-env": "^10.1.0",
