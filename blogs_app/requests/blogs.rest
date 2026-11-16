@@ -43,7 +43,7 @@ Content-Type: application/json
 GET  http://localhost:3001/api/users
 
 ### LIST A USER ###
-GET  http://localhost:3001/api/users/1
+GET  http://localhost:3001/api/users/5
 
 ### LOGIN A USER ###
 POST  http://localhost:3001/api/login
@@ -60,4 +60,22 @@ Content-Type: application/json
 
 {
  "name":"Mike Silas" 
+}
+
+### CREATE A READING LIST ###
+POST  http://localhost:3001/api/readinglists
+Content-Type: application/json
+
+{
+  "blogId": 4,
+  "userId": 5
+}
+
+### CHANGE READ STATE ###
+PUT http://localhost:3001/api/readinglists/1
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+  "read": true
 }
