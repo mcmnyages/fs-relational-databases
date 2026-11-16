@@ -1,7 +1,8 @@
 const jwt = require('jsonwebtoken')
 const { SECRET } = require('../util/config')
+const { User, Session } = require('../models')
 
-const userExtractor = (req, res, next) => {
+const userExtractor = async (req, res, next) => {
   try {
     const authorization = req.get('authorization')
 
@@ -27,13 +28,43 @@ const userExtractor = (req, res, next) => {
       })
     }
 
+    // Check whether the session exists
+    const session = await Session.findOne({
+      where: {
+        token,
+        userId: decodedToken.id
+      }
+    })
+
+    if (!session) {
+      return res.status(401).json({
+        error: 'session expired or invalid'
+      })
+    }
+
+    // Check whether the user exists and is enabled
+    const user = await User.findByPk(decodedToken.id)
+
+    if (!user || user.disabled) {
+      return res.status(401).json({
+        error: 'account disabled or user not found'
+      })
+    }
+
     req.decodedToken = decodedToken
+    req.user = user
+    req.token = token
 
     next()
   } catch (error) {
-    return res.status(401).json({
-      error: 'token missing or invalid'
-    })
+    if (error.name === 'JsonWebTokenError' ||
+        error.name === 'TokenExpiredError') {
+      return res.status(401).json({
+        error: 'token missing or invalid'
+      })
+    }
+
+    next(error)
   }
 }
 
