@@ -62,6 +62,7 @@ router.post('/', userExtractor, async (req, res, next) => {
       title: req.body.title,
       url: req.body.url,
       likes: req.body.likes || 0,
+      year: req.body.year,
       userId: req.decodedToken.id
     })
 
