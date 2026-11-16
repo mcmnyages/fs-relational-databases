@@ -7,10 +7,11 @@ Content-Type: application/json
 Authorization: Bearer 
 
 {
-  "author": "Silas Moracha",
-  "title": "Check the token in the blog",
-  "url": "https://reactpatterns.com/",
-  "likes": 7
+  "author": "John Doe",
+  "title": "Learning Sequelize",
+  "url": "https://example.com",
+  "likes": 5,
+  "year": 2026
 }
 
 ### EDIT A BLOG ###
@@ -33,8 +34,8 @@ POST  http://localhost:3001/api/users
 Content-Type: application/json
 
 {
-  "name": "John Doe",
-  "username": "john@example.com",
+  "name": "Norah Doe",
+  "username": "norah@example.com",
   "password": "secret"
 }
 
@@ -49,7 +50,7 @@ POST  http://localhost:3001/api/login
 Content-Type: application/json
 
 {
-  "username": "mcmnyages",
+  "username": "norah@example.com",
   "password":"secret"
 }
 
