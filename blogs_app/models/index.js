@@ -1,8 +1,24 @@
 const Blog = require('./blog')
 const User = require('./user')
+const ReadingList = require('./readinglist')
 
 User.hasMany(Blog)
 Blog.belongsTo(User)
+User.belongsToMany(Blog, {
+  through: ReadingList
+})
+
+Blog.belongsToMany(User, {
+  through: ReadingList
+})
+
+User.belongsToMany(Blog, {
+  through: ReadingList,
+  as: 'readings',
+  foreignKey: 'userId',
+  otherKey: 'blogId'
+})
+
 
 // We are removing authomatic sync to substitute with migrations
 // const syncModels = async () => {
@@ -10,8 +26,10 @@ Blog.belongsTo(User)
 //     await Blog.sync({ alter: true })
 // }
 
+
+
 module.exports = {
-    Blog,
-    User,
-   
+  Blog,
+  User,
+  ReadingList
 }
