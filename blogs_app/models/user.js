@@ -29,6 +29,11 @@ User.init({
       }
     }
   },
+
+  passwordHash: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
   disabled: {
     type: DataTypes.BOOLEAN,
     allowNull: false,

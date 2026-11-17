@@ -1,8 +1,21 @@
+
 const router = require('express').Router()
-const { Blog, User } = require('../models')
+const { Blog, User, Session, ReadingList } = require('../models')
 
 router.post('/reset', async (req, res, next) => {
   try {
+    await Session.destroy({
+      where: {},
+      truncate: true,
+      cascade: true
+    })
+
+    await ReadingList.destroy({
+      where: {},
+      truncate: true,
+      cascade: true
+    })
+
     await Blog.destroy({
       where: {},
       truncate: true,
