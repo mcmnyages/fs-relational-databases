@@ -68,6 +68,7 @@ const userExtractor = async (req, res, next) => {
   }
 }
 
+
 const errorHandler = (error, req, res, next) => {
   console.error(error.message)
 
